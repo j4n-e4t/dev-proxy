@@ -10,6 +10,15 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+func normalizeHostLabel(s string) string {
+	// Host labels should not include whitespace. Replace whitespace runs with "-".
+	s = strings.ToLower(strings.TrimSpace(s))
+	if s == "" {
+		return ""
+	}
+	return strings.Join(strings.Fields(s), "-")
+}
+
 // Route is a concrete host/path_prefix -> target mapping used by the proxy.
 type Route struct {
 	Host       string `yaml:"host"`
@@ -168,10 +177,10 @@ func ResolveRuntime(globalPath string) (RuntimeConfig, error) {
 		if err != nil {
 			return RuntimeConfig{}, fmt.Errorf("load project %q: %w", pPath, err)
 		}
-		project := strings.ToLower(strings.TrimSpace(pcfg.Project))
+		project := normalizeHostLabel(pcfg.Project)
 
 		for svcName, svc := range pcfg.Services {
-			svcName = strings.ToLower(strings.TrimSpace(svcName))
+			svcName = normalizeHostLabel(svcName)
 			host := strings.TrimSpace(svc.Host)
 			if host == "" {
 				// Convention:
