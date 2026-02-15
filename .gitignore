@@ -1,0 +1,26 @@
+# Go build/test artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+coverage.txt
+
+# Local binaries
+/dev-proxy
+/dev-proxy.exe
+
+# Build output
+dist/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*~

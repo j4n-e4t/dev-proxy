@@ -1,0 +1,12 @@
+project: "myapp"
+
+services:
+  # "root" routes myapp.localhost
+  root:
+    target: "http://127.0.0.1:5173"
+
+  # other services route <service>.<project>.localhost (e.g. api.myapp.localhost)
+  api:
+    target: "http://127.0.0.1:4000"
+    path_prefix: "/v1"
+

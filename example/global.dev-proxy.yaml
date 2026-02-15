@@ -1,0 +1,9 @@
+listen: ":80"
+base_domain: "localhost"
+default_target: "http://127.0.0.1:3000"
+
+projects:
+  - path: "/path/to/project-a/.dev-proxy.yaml"
+  - path: "/path/to/project-b/.dev-proxy.yaml"
+    enabled: false
+
